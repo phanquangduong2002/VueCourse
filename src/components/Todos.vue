@@ -1,6 +1,12 @@
 <template>
   <div class="flex flex-col px-20 my-6 items-start justify-start gap-4">
-    <TodoItem v-for="todo in todos" v-bind:key="todo" v-bind:todoProps="todo" />
+    <TodoItem
+      v-for="todo in todos"
+      :key="todo"
+      :todoProps="todo"
+      @item-completed="markItemCompleted"
+      @delete-item="deleteTodo"
+    />
   </div>
 </template>
 
@@ -35,8 +41,21 @@ export default {
       }
     ])
 
+    const markItemCompleted = id => {
+      todos.value = todos.value.map(todo => {
+        if (todo.id === id) todo.completed = !todo.completed
+        return todo
+      })
+    }
+
+    const deleteTodo = id => {
+      todos.value = todos.value.filter(todo => todo.id !== id)
+    }
+
     return {
-      todos: todos
+      todos,
+      markItemCompleted,
+      deleteTodo
     }
   }
 }
