@@ -1,6 +1,8 @@
 <template>
-  <header class="header">
-    <h1>To do List</h1>
+  <header class="bg-[#333]">
+    <h1 class="text-3xl text-white font-semibold text-center p-4">
+      To do List
+    </h1>
   </header>
 </template>
 
@@ -10,11 +12,4 @@ export default {
 }
 </script>
 
-<style scoped>
-.header h1 {
-  font-size: 26px;
-  font-weight: 400;
-  text-align: center;
-  padding: 10px;
-}
-</style>
+<style scoped></style>
