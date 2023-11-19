@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col px-8 my-6 items-start justify-start gap-2">
+  <div class="flex flex-col px-20 my-6 items-start justify-start gap-4">
     <TodoItem v-for="todo in todos" v-bind:key="todo" v-bind:todoProps="todo" />
   </div>
 </template>
@@ -13,10 +13,26 @@ export default {
   components: { TodoItem },
   setup() {
     const todos = ref([
-      'Learn VueJS',
-      'Learn PHP',
-      'Learn MySQL',
-      'Learn English'
+      {
+        id: 1,
+        title: 'Learn VueJS',
+        completed: false
+      },
+      {
+        id: 2,
+        title: 'Learn PHP',
+        completed: false
+      },
+      {
+        id: 3,
+        title: 'Learn NextJS',
+        completed: false
+      },
+      {
+        id: 4,
+        title: 'Learn Laravel',
+        completed: false
+      }
     ])
 
     return {
