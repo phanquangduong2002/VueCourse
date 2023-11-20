@@ -1,5 +1,6 @@
 <template>
   <div class="flex flex-col px-20 my-6 items-start justify-start gap-4">
+    <AddTodo @add-todo="addTodo" />
     <TodoItem
       v-for="todo in todos"
       :key="todo"
@@ -13,10 +14,11 @@
 <script>
 import { ref } from 'vue'
 import TodoItem from './TodoItem.vue'
+import AddTodo from './AddTodo.vue'
 
 export default {
   name: 'Todos',
-  components: { TodoItem },
+  components: { TodoItem, AddTodo },
   setup() {
     const todos = ref([
       {
@@ -52,10 +54,24 @@ export default {
       todos.value = todos.value.filter(todo => todo.id !== id)
     }
 
+    const addTodo = title => {
+      const id = todos.value.length + 1
+      const newTodo = {
+        id,
+        title,
+        completed: false
+      }
+
+      console.log(newTodo)
+
+      todos.value.push(newTodo)
+    }
+
     return {
       todos,
       markItemCompleted,
-      deleteTodo
+      deleteTodo,
+      addTodo
     }
   }
 }
