@@ -5,14 +5,17 @@
         <img src="../assets/icons/logo.svg" alt="Logo SVG" class="w-10 h-10" />
         <h1 class="text-4xl text-white font-semibold text-center">ToDoList</h1>
       </div>
-      <p class="text-xl text-white font-extralight">Welcome to dashboard</p>
+      <Navbar />
     </div>
   </header>
 </template>
 
 <script>
+import Navbar from './Navbar.vue'
+
 export default {
-  name: 'Header'
+  name: 'Header',
+  components: { Navbar }
 }
 </script>
 
