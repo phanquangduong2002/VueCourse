@@ -1,6 +1,7 @@
 <template>
   <div>
     <Header />
+    <Navbar />
     <Tasks />
     <router-view />
   </div>
@@ -8,10 +9,11 @@
 
 <script>
 import Header from './components/Header/Header.vue'
+import Navbar from './components/Navbar/Navbar.vue'
 import Tasks from './components/Tasks/Tasks.vue'
 export default {
   name: 'App',
-  components: { Header, Tasks }
+  components: { Header, Navbar, Tasks }
 }
 </script>
 
