@@ -13,6 +13,8 @@
 
 <script>
 import { ref } from 'vue'
+import axios from 'axios'
+
 import TodoItem from './TodoItem.vue'
 import AddTodo from './AddTodo.vue'
 
@@ -20,28 +22,21 @@ export default {
   name: 'Todos',
   components: { TodoItem, AddTodo },
   setup() {
-    const todos = ref([
-      {
-        id: 1,
-        title: 'Learn VueJS',
-        completed: false
-      },
-      {
-        id: 2,
-        title: 'Learn PHP',
-        completed: false
-      },
-      {
-        id: 3,
-        title: 'Learn NextJS',
-        completed: false
-      },
-      {
-        id: 4,
-        title: 'Learn Laravel',
-        completed: false
+    const todos = ref([])
+
+    const getAllTodos = async () => {
+      try {
+        const res = await axios.get(
+          'https://jsonplaceholder.typicode.com/todos?_limit=5'
+        )
+
+        todos.value = res.data
+      } catch (error) {
+        console.log(error)
       }
-    ])
+    }
+
+    getAllTodos()
 
     const markItemCompleted = id => {
       todos.value = todos.value.map(todo => {
@@ -50,21 +45,28 @@ export default {
       })
     }
 
-    const deleteTodo = id => {
-      todos.value = todos.value.filter(todo => todo.id !== id)
+    const deleteTodo = async id => {
+      try {
+        await axios.delete(`https://jsonplaceholder.typicode.com/todos/${id}`)
+        todos.value = todos.value.filter(todo => todo.id !== id)
+      } catch (error) {
+        console.log(error)
+      }
     }
 
-    const addTodo = title => {
-      const id = todos.value.length + 1
-      const newTodo = {
-        id,
-        title,
-        completed: false
+    const addTodo = async title => {
+      try {
+        const res = await axios.post(
+          `https://jsonplaceholder.typicode.com/todos`,
+          {
+            title,
+            completed: false
+          }
+        )
+        todos.value.push(res.data)
+      } catch (error) {
+        console.log(error)
       }
-
-      console.log(newTodo)
-
-      todos.value.push(newTodo)
     }
 
     return {

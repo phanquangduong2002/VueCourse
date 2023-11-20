@@ -27,7 +27,7 @@ export default {
       context.emit('item-completed', props.todoProps.id)
     }
 
-    const deleteItem = () => {
+    const deleteItem = async id => {
       context.emit('delete-item', props.todoProps.id)
     }
 
