@@ -8,13 +8,23 @@
 </template>
 
 <script>
+import { useTaskStore } from './stores/TaskStore'
 import Header from './components/Header/Header.vue'
 import Navbar from './components/Navbar/Navbar.vue'
 import Tasks from './components/Tasks/Tasks.vue'
 
 export default {
   name: 'App',
-  components: { Header, Navbar, Tasks }
+  components: { Header, Navbar, Tasks },
+  setup() {
+    const taskStore = useTaskStore()
+
+    taskStore.getTasks()
+
+    return {
+      taskStore
+    }
+  }
 }
 </script>
 
