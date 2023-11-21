@@ -19,8 +19,6 @@ export default {
   setup() {
     const taskStore = useTaskStore()
 
-    taskStore.getTasks()
-
     return {
       taskStore
     }

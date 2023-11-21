@@ -2,7 +2,23 @@ import { defineStore } from 'pinia'
 
 export const useTaskStore = defineStore('task_store', {
   state: () => ({
-    tasks: [],
+    tasks: [
+      {
+        id: 1,
+        title: 'buy some milk',
+        isFav: true
+      },
+      {
+        id: 2,
+        title: 'drink soda',
+        isFav: false
+      },
+      {
+        id: 3,
+        title: 'eat some pinapples',
+        isFav: false
+      }
+    ],
     filter: 'all',
     isLoading: false
   }),
@@ -20,17 +36,6 @@ export const useTaskStore = defineStore('task_store', {
     }
   },
   actions: {
-    async getTasks() {
-      try {
-        this.isLoading = true
-        const res = await fetch('../../data/db.json')
-        const data = await res.json()
-        this.tasks = data.tasks
-        this.isLoading = false
-      } catch (error) {
-        console.error('Error fetching tasks:', error)
-      }
-    },
     changeFilter(filterType) {
       this.filter = filterType
     },
@@ -46,5 +51,6 @@ export const useTaskStore = defineStore('task_store', {
       const task = this.tasks.find(task => task.id === id)
       task.isFav = !task.isFav
     }
-  }
+  },
+  persist: true
 })
